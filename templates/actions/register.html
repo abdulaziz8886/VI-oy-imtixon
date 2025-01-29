@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{%block content%}
+
+<form method="POST">
+    {%csrf_token%}
+    <div class="form-container1">
+        <h2>Ro'yxatdan o'tish</h2>
+        <form method='POST'>
+            {%csrf_token%}
+            <div class="form-group1">
+                <label for="name">Username</label>
+                <input type="text" id="name" name="username" placeholder="username kiriting ...">
+            </div>
+            <div class="form-group1">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Email kiriting ...">
+            </div>
+            <div class="form-group1">
+                <label for="district">Parol o'ylab toping</label>
+                <input type="password" name="password"  placeholder="Parol kiriting ...">
+            </div>
+            <div class="form-group1">
+                <label for="neighborhood">Parolni takrorlang</label>
+                <input type="password" id="neighborhood" name="password1" placeholder="Parolni takrorlang ...">
+            </div>
+            <button type="submit" class="submit-btn">Qo'shish</button>
+
+
+
+            <div class="form-group1">
+                <div class="div_123">
+                    <h4 class="ass">Already have an account</h4>
+                    <a class="ass1" href="{%url 'login'%}">Login here</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</form>
+    
+
+
+
+{% endblock %}
