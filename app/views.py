@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import comentuser, products, like, bascet
+from .models import comentuser, products, like, bascet, zay_first, zay_second, category_month_img
 from django.http import HttpResponse
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -37,9 +37,12 @@ def home(request):
     user = request.user
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
+    firs = zay_first.objects.all()
+    catagorys_of = zay_second.objects.all()
+    category_month = category_month_img.objects.all()
     son1 = str(len(data1))
     son = str(len(data))
-    return render(request, 'index.html', {'posts': son, 'posts1' : son1})
+    return render(request, 'index.html', {'posts': son, 'posts1' : son1, 'zay_first' : firs, 'catagorys_of_month' : catagorys_of, 'category_month_img' : category_month})
 
 def shop_single(request, slug):
     user = request.user
@@ -63,12 +66,21 @@ def shop_single(request, slug):
         if button == 'fourite':
             if like.objects.filter(user=user, slug=slug1).exists():
                 messages.info(request, 'Ishbu maxsulot allaqachon yoqtirganlarim bo\'limida')
+                return redirect('fourite')
             else:
-                like.objects.create(user=user, rasm= rasm, slug=slug1, title=title, narx=narx)
-            return redirect('fourite')
+                if request.user.is_authenticated:
+                    like.objects.create(user=user, rasm= rasm, slug=slug1, title=title, narx=narx)
+                    return redirect('fourite')
+                else:
+                    messages.info(request, 'Iltimos ro\'yxatdan o\'ting')
+                    return redirect('register')
         
         rang = request.POST.get('rang')
+        if rang == None:
+            rang = 'Oq'
         rezmer = request.POST.get('razmer')
+        if rezmer == None:
+            rezmer = 'S'
         action = request.POST.get('action')
         value = int(request.POST.get('value1'))  # Boshlang'ich qiymat 1 deb olamiz
         if action == 'plus':
@@ -76,13 +88,17 @@ def shop_single(request, slug):
         elif action == 'minus':
             value = value - 1
         if button == 'buy':
-            if bascet.objects.filter(title = title).exists():
+            if bascet.objects.filter(title = title, user = user).exists():
                 messages.info(request, 'Ushbu maxsulot tanlangan')
                 return redirect('bascet')
             else:
-                jami = int(narx) * value
-                bascet.objects.create(user = user, rasm = rasm, title=title, rang = rang, razmer = rezmer, narx = narx, soni = value, jami = jami, slug = slug1)
-                return redirect('bascet')
+                if request.user.is_authenticated:
+                    jami = int(narx) * value
+                    bascet.objects.create(user = user, rasm = rasm, title=title, rang = rang, razmer = rezmer, narx = narx, soni = value, jami = jami, slug = slug1)
+                    return redirect('bascet')
+                else:
+                    messages.info(request, 'Iltimos ro\'yxatdan o\'ting')
+                    return redirect('register')
         a = products.objects.filter(slug=slug)
         return render(request, 'shop-single.html', {'value': value, 'posts' : son, 'product':a, 'posts1' : son1})
             
@@ -133,12 +149,16 @@ def addfourite(request, slug):
         messages.info(request, 'Ishbu maxsulot allaqachon yoqtirganlarim bo\'limida')
         return redirect('fourite')
     else:
-        a = products.objects.get(slug=slug)
-        rasm = a.rasm
-        title = a.title
-        narx = a.narx
-        like.objects.create(user = request.user, rasm = rasm, slug = slug, title = title, narx = narx)
-        return redirect('fourite')
+        if request.user.is_authenticated:
+            a = products.objects.get(slug=slug)
+            rasm = a.rasm
+            title = a.title
+            narx = a.narx
+            like.objects.create(user = request.user, rasm = rasm, slug = slug, title = title, narx = narx)
+            return redirect('fourite')
+        else:
+            messages.info(request, 'Iltimos ro\'yxatdan o\'ting')
+            return redirect('register')
 
 def delete_bascet(request, product_id):
     pro = bascet.objects.get(id = product_id)

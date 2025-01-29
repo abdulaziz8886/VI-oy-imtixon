@@ -69,10 +69,6 @@ class products(models.Model):
     description = models.TextField()
     rang = models.ManyToManyField(to=categoryRang)
     narx = models.PositiveBigIntegerField()
-
-    
-
-
     def __str__(self):
         return self.title
 
@@ -84,3 +80,24 @@ class comentuser(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+
+
+class zay_first(models.Model):
+    title = models.CharField(max_length=25)
+    pre_title = models.CharField(max_length=35)
+    description = models.TextField()
+    img = models.ImageField(upload_to='zay_firs/')
+
+class zay_second(models.Model):
+    title = models.CharField(max_length=40)
+    description = models.CharField(max_length=100)
+
+
+class category_month_img(models.Model):
+    img = models.ImageField(upload_to='month_category/')
+    other = models.ForeignKey(to=categoryProduct, on_delete=models.CASCADE)
+
+    

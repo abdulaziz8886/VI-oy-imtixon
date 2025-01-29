@@ -1,6 +1,22 @@
 from django.contrib import admin
 
-from .models import comentuser, categorygander, products, categoryProduct, categorySale, categoryRang, categoryRazmer
+
+from .models import comentuser, categorygander, products, categoryProduct, categorySale, categoryRang, categoryRazmer, zay_first,zay_second, category_month_img 
+
+
+@admin.register(zay_second)
+class catagorys_of(admin.ModelAdmin):
+    list_display = ['title']
+
+@admin.register(category_month_img)
+class category_month(admin.ModelAdmin):
+    ...
+
+
+@admin.register(zay_first)
+class Zay_firs(admin.ModelAdmin):
+    list_display = ['title', 'pre_title']
+
 
 @admin.register(comentuser)
 class ComentUser(admin.ModelAdmin):
