@@ -24,7 +24,6 @@
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
-
         <div class="col-lg-3">
             <h1 class="h2 pb-4">Categories</h1>
             <ul class="list-unstyled templatemo-accordion">
@@ -167,7 +166,7 @@
                 <div class="row d-flex flex-row">
                     <!--Controls-->
                     <div class="col-1 align-self-center">
-                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
+                        <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="prev">
                             <i class="text-light fas fa-chevron-left"></i>
                         </a>
                     </div>
@@ -175,76 +174,34 @@
 
                     <!--Carousel Wrapper-->
                     <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                        {%for i in brands1%}
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand" data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
-
-                                <!--First slide-->
-                                <div class="carousel-item active">
+                                
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                     <div class="row">
+                                        {%for j in brands%}
+                                        {%if forloop.counter > 4%}
+                                        {% comment %} salom {% endcomment %}
+                                        {% else %}
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_01.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_02.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_03.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_04.png'%}" alt="Brand Logo"></a>
-                                        </div>
+                                            <a href=""><img class="img-fluid brand-img" src="{{j.img.url}}" alt="Brand Logo"></a>
+                                        </div>  
+                                        {% endif %}
+                                        {% endfor %}  
                                     </div>
                                 </div>
-                                <!--End First slide-->
-
-                                <!--Second slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_01.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_02.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_03.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_04.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Second slide-->
-
-                                <!--Third slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_01.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_02.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_03.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_04.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Third slide-->
-
                             </div>
-                            <!--End Slides-->
                         </div>
+                        {% endfor %}
+                        
                     </div>
                     <!--End Carousel Wrapper-->
 
                     <!--Controls-->
                     <div class="col-1 align-self-center">
-                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
+                        <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="next">
                             <i class="text-light fas fa-chevron-right"></i>
                         </a>
                     </div>

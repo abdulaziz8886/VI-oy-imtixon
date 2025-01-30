@@ -33,6 +33,7 @@ class categorygander(models.Model):
 class categorySale(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
+    
     def __str__(self):
         return self.name
     def get_absolute_url(self):
@@ -65,9 +66,9 @@ class products(models.Model):
     category = models.ForeignKey(categorygander, on_delete=models.CASCADE)
     category1 = models.ForeignKey(categorySale, on_delete=models.CASCADE)
     category2 = models.ForeignKey(categoryProduct, on_delete=models.CASCADE, null=True, blank=True)  
-    razmer = models.ManyToManyField(to=categoryRazmer)
+    razmer = models.ManyToManyField(to=categoryRazmer, default='S')
     description = models.TextField()
-    rang = models.ManyToManyField(to=categoryRang)
+    rang = models.ManyToManyField(to=categoryRang, default='Oq')
     narx = models.PositiveBigIntegerField()
     def __str__(self):
         return self.title
@@ -85,19 +86,49 @@ class comentuser(models.Model):
 
 
 
+
+
+
+
 class zay_first(models.Model):
     title = models.CharField(max_length=25)
     pre_title = models.CharField(max_length=35)
     description = models.TextField()
     img = models.ImageField(upload_to='zay_firs/')
 
-class zay_second(models.Model):
+class zay_second_text(models.Model):
     title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
 
 
-class category_month_img(models.Model):
-    img = models.ImageField(upload_to='month_category/')
+class zay_second(models.Model):
+    img = models.ImageField(upload_to='zay_second/')
     other = models.ForeignKey(to=categoryProduct, on_delete=models.CASCADE)
 
     
+class zay_third_text(models.Model):
+    title = models.CharField(max_length=25)
+    pre_title = models.CharField(max_length=100)
+
+class zay_third(models.Model):
+    img = models.ImageField(upload_to='zay_third/')
+    price = models.PositiveBigIntegerField()
+    title = models.CharField(max_length=15)
+    pre_title = models.CharField(max_length=100)
+
+
+
+class abdoutUs(models.Model):
+    izoh = models.TextField()
+
+
+class services(models.Model):
+    icon = models.CharField(max_length=20, help_text='Iltimosbu yerga https://fontawesome.com/v4/icons/ saytidan icon nomini kiriting')
+    title = models.CharField(max_length=25)
+
+
+class brands(models.Model):
+    img = models.ImageField(upload_to='our_brands/')
+
+
+

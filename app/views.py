@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import comentuser, products, like, bascet, zay_first, zay_second, category_month_img
+from .models import *
 from django.http import HttpResponse
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -9,9 +9,19 @@ def about(request):
     user = request.user
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
+    abuot = abdoutUs.objects.all()
+    services1 = services.objects.all()
+    brands1 = brands.objects.all()
+    cnt = 0
+    for i in brands1:
+        cnt += 1
+    if cnt // 4 < cnt / 4:
+        cnt = cnt // 4 + 1
+    if cnt // 4 == cnt / 4:
+        cnt = int(cnt / 4)
     son1 = str(len(data1))
     son = str(len(data))
-    return render(request, 'about.html', {'posts': son, 'posts1' : son1})
+    return render(request, 'about.html', {'posts': son, 'posts1' : son1, 'about' : abuot , 'services' : services1, 'brands' : brands1, 'brands1' : range(cnt)})
 def contac(request):
     user1 = request.user
     data = like.objects.filter(user=user1)
@@ -26,6 +36,7 @@ def contac(request):
                 email = request.POST.get('email')
                 message = request.POST.get('message')
                 comentuser.objects.create(name = user, email = email, izoh = message)
+                messages.info(request, 'Sizning murojatingiz adminlar tominidan ko\'rib chiqiladi')
             else:
                 messages.info(request, "Adminga yozish uchun birinchi ro'yxatdan o'ting")
                 return redirect('register')
@@ -38,11 +49,13 @@ def home(request):
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
     firs = zay_first.objects.all()
-    catagorys_of = zay_second.objects.all()
-    category_month = category_month_img.objects.all()
+    zay_second_text1 = zay_second_text.objects.all()
+    zay_second1 = zay_second.objects.all()
+    zay_third_text1 = zay_third_text.objects.all()
+    zay_third1 = zay_third.objects.all()
     son1 = str(len(data1))
     son = str(len(data))
-    return render(request, 'index.html', {'posts': son, 'posts1' : son1, 'zay_first' : firs, 'catagorys_of_month' : catagorys_of, 'category_month_img' : category_month})
+    return render(request, 'index.html', {'posts': son, 'posts1' : son1, 'zay_first' : firs, 'zay_second_text' : zay_second_text1, 'zay_second' : zay_second1, "zay_third_text" : zay_third_text1, 'zay_third' : zay_third1})
 
 def shop_single(request, slug):
     user = request.user
@@ -109,13 +122,21 @@ def shop(request):
     user = request.user
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
+    brands1 = brands.objects.all()
+    cnt = 0
+    for i in brands1:
+        cnt += 1
+    if cnt // 4 < cnt / 4:
+        cnt = cnt // 4 + 1
+    if cnt // 4 == cnt / 4:
+        cnt = int(cnt / 4)
     son1 = str(len(data1))
     son = str(len(data))
     a = products.objects.all()
-    paginator = Paginator(a, 9)
+    paginator = Paginator(a, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) 
-    return render(request, 'shop.html', {'product' : page_obj, 'page' : page_obj, 'posts': son, 'posts1' : son1})
+    return render(request, 'shop.html', {'product' : page_obj, 'page' : page_obj, 'posts': son, 'posts1' : son1,'brands' : brands1, 'brands1' : range(cnt)})
 
 def fourite(request):
     user = request.user
@@ -237,26 +258,50 @@ def categoryVeiw(request, slug):
     user = request.user
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
+    brands1 = brands.objects.all()
+    cnt = 0
+    for i in brands1:
+        cnt += 1
+    if cnt // 4 < cnt / 4:
+        cnt = cnt // 4 + 1
+    if cnt // 4 == cnt / 4:
+        cnt = int(cnt / 4)
     son1 = str(len(data1))
     son = str(len(data))
     a = products.objects.filter(category__slug=slug)
-    return render(request, 'categories/category.html', {'product' : a, 'posts': son, 'posts1' : son1})
+    return render(request, 'categories/category.html', {'product' : a, 'posts': son, 'posts1' : son1, 'brands' : brands1, 'brands1' : range(cnt)})
 
 def category2Veiw(request, slug):
     user = request.user
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
+    brands1 = brands.objects.all()
+    cnt = 0
+    for i in brands1:
+        cnt += 1
+    if cnt // 4 < cnt / 4:
+        cnt = cnt // 4 + 1
+    if cnt // 4 == cnt / 4:
+        cnt = int(cnt / 4)
     son1 = str(len(data1))
     son = str(len(data))
     posts = products.objects.filter(category1__slug=slug)
-    return render(request, 'categories/category2.html', {'product' : posts, 'posts': son, 'posts1' : son1})
+    return render(request, 'categories/category2.html', {'product' : posts, 'posts': son, 'posts1' : son1, 'brands' : brands1, 'brands1' : range(cnt)})
 
 def category3Veiw(request, slug):
     a = products.objects.filter(category2__slug=slug)
+    brands1 = brands.objects.all()
+    cnt = 0
+    for i in brands1:
+        cnt += 1
+    if cnt // 4 < cnt / 4:
+        cnt = cnt // 4 + 1
+    if cnt // 4 == cnt / 4:
+        cnt = int(cnt / 4)
     user = request.user
     data = like.objects.filter(user=user)
     data1 = bascet.objects.filter(user = user)
     son1 = str(len(data1))
     son = str(len(data))
-    return render(request, 'categories/category3.html', {'product' : a, 'posts': son, 'posts1' : son1})
+    return render(request, 'categories/category3.html', {'product' : a, 'posts': son, 'posts1' : son1, 'brands' : brands1, 'brands1' : range(cnt)})
 

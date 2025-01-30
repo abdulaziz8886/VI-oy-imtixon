@@ -24,11 +24,9 @@
         <div class="row align-items-center py-5">
             <div class="col-md-8 text-white">
                 <h1>About Us</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+                {%for i in about%}
+                <p>{{i.izoh}} </p>
+                {% endfor %}
             </div>
             <div class="col-md-4">
                 <img src="{%static 'assets/img/about-hero.svg'%}" alt="About Hero">
@@ -38,7 +36,7 @@
 </section>
 <!-- Close Banner -->
 
-<!-- Start Section -->
+
 <section class="container py-5">
     <div class="row text-center pt-5 pb-3">
         <div class="col-lg-6 m-auto">
@@ -50,34 +48,14 @@
         </div>
     </div>
     <div class="row">
-
+        {%for j in services%}
         <div class="col-md-6 col-lg-3 pb-5">
             <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
-                <h2 class="h5 mt-4 text-center">Delivery Services</h2>
+                <div class="h1 text-success text-center"><i class="{{j.icon}}"></i></div>
+                <h2 class="h5 mt-4 text-center">{{j.title}}</h2>
             </div>
         </div>
-
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
-                <h2 class="h5 mt-4 text-center">Shipping & Return</h2>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
-                <h2 class="h5 mt-4 text-center">Promotion</h2>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon-wap shadow">
-                <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
-                <h2 class="h5 mt-4 text-center">24 Hours Service</h2>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </section>
 <!-- End Section -->
@@ -85,6 +63,8 @@
 <!-- Start Brands -->
 <section class="bg-light py-5">
     <div class="container my-4">
+        
+
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Our Brands</h1>
@@ -105,70 +85,28 @@
 
                     <!--Carousel Wrapper-->
                     <div class="col">
+                        {%for i in brands1%}
                         <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand" data-bs-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
-
-                                <!--First slide-->
-                                <div class="carousel-item active">
+                                
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                     <div class="row">
+                                        {%for j in brands%}
+                                        {%if forloop.counter > 4%}
+                                        {% comment %} salom {% endcomment %}
+                                        {% else %}
                                         <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_01.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_02.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_03.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_04.png'%}" alt="Brand Logo"></a>
-                                        </div>
+                                            <a href=""><img class="img-fluid brand-img" src="{{j.img.url}}" alt="Brand Logo"></a>
+                                        </div>  
+                                        {% endif %}
+                                        {% endfor %}  
                                     </div>
                                 </div>
-                                <!--End First slide-->
-
-                                <!--Second slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_01.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_02.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_03.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_04.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Second slide-->
-
-                                <!--Third slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_01.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_02.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_03.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="{%static 'assets/img/brand_04.png'%}" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Third slide-->
-
                             </div>
-                            <!--End Slides-->
                         </div>
+                        {% endfor %}
+                        
                     </div>
                     <!--End Carousel Wrapper-->
 
