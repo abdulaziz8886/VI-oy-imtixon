@@ -14,3 +14,16 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
+
+schema_view1 = get_schema_view(
+    openapi.Info(
+        title='Zay shop2',
+        default_version='v1',
+        description='Api documentation',
+        # terms_of_service="",
+        contact=openapi.Contact(email='abdulazizilhomboyev2@gmail.com'),
+        license=openapi.License(name='From Data Union')
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
