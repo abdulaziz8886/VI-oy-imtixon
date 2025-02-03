@@ -8,6 +8,7 @@ urlpatterns = [
     path('second_admin/', second_admin_site.urls),
     path('', include('app.urls')),
     path('api/', include("api.urls")),
-    path('api-rest/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-rest/', include('rest_framework.urls', namespace='rest_framework')),
+    path('accounts/', include('allauth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
